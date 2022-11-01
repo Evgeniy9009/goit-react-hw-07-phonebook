@@ -14,11 +14,11 @@ export default function ContactList() {
     dispatch(action)
   }
 
-  const elements = items.map(({ name, phone, id}) => {
-      return (
+  const elements = items.map(({ name, phone, id}) => 
+      
         <li className={css.item} key={id} > {name} {phone} <button className={css.btn} onClick={ () => {onRemoveContact(id)} }>Delete</button></li>
-      )
-    })
+      
+    )
   return (
     <div>
       <ul>{ elements }</ul>
