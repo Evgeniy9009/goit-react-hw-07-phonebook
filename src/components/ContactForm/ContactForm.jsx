@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { nanoid } from 'nanoid'
 import css from 'components/ContactForm/ContactForm.module.css'
-import { addContact } from '../../redux/contacts/contacts-slice'
+// import { addContact } from '../../redux/contacts/contacts-slice'
+import { addContact } from 'redux/contacts/contacts-operation'
 import { useDispatch, useSelector } from 'react-redux'
 import { getFilterContacts } from 'redux/contacts/contacts-selector'
 
@@ -11,24 +12,25 @@ export default function ContactForm() {
     console.log('items', items)
 
     const [name, setName] = useState('')
-    const [number, setNumber] = useState('')
+    const [phone, setPhone] = useState('')
 
     const idName = nanoid()
-    const idNumber = nanoid()
+    const idPhone = nanoid()
 
     const contacts = useSelector(getFilterContacts)
     const dispatch = useDispatch()
     
     const onAddContact = (contact) => {
         if (isDuplicate(contact)) {
-            return alert (`Name ${contact.name} or number ${contact.number} is already in contacts.`)
+            return alert (`Name ${contact.name} or phone ${contact.phone} is already in contacts.`)
         }
         const action = addContact(contact)
         dispatch(action)
     }
+    
 
-    const isDuplicate = ({ name, number }) => {
-        const res = contacts.find((item) => item.name.toLocaleLowerCase() === name.toLocaleLowerCase() || item.number === number)
+    const isDuplicate = ({ name, phone }) => {
+        const res = contacts.find((item) => item.name.toLocaleLowerCase() === name.toLocaleLowerCase() || item.phone === phone)
         return res
     }
 
@@ -37,8 +39,8 @@ export default function ContactForm() {
         switch (name) {
             case "name": 
                 return setName(value)
-            case "number":
-                return setNumber(value)
+            case "phone":
+                return setPhone(value)
             default: 
                 return
         }
@@ -46,11 +48,11 @@ export default function ContactForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const contact= {name, number}
+        const contact= {name, phone}
         onAddContact(contact)
         console.log(contact)
         setName('')
-        setNumber('')
+        setPhone('')
 
     }
 
@@ -67,12 +69,12 @@ export default function ContactForm() {
                         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                         required
                     />
-                <label htmlFor={idNumber}>Number</label>
+                <label htmlFor={idPhone}>Number</label>
                     <input
-                        id={idNumber}
+                        id={idPhone}
                         type="tel"
-                        name="number"
-                        value={number}
+                        name="phone"
+                        value={phone}
                         onChange={handleChange}
                         pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
                         title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"

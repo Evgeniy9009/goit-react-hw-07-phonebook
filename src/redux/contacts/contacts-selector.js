@@ -1,15 +1,16 @@
 
-export const getContacts = store => store.contacts;
+export const getContacts = ({ contacts }) => contacts.items;
+export const getState = ({contacts}) => ({loading: contacts.loading, error: contacts.error})
 export const getFilterContacts = ({ filter, contacts }) => {
     if (!filter) {
-        return contacts
+        return contacts.items
     }
 
     const normalezedFilter = filter.toLocaleLowerCase()
-    const filteredContacts = contacts.filter(({ name, number }) => {
+    const filteredContacts = contacts.items.filter(({ name, phone }) => {
         const normalizedName = name.toLocaleLowerCase()
-        const normalizedNumber = number.toLocaleLowerCase()
-        const res = normalizedName.includes(normalezedFilter) || normalizedNumber.includes(normalezedFilter)
+        const normalizedPhone = phone.toLocaleLowerCase()
+        const res = normalizedName.includes(normalezedFilter) || normalizedPhone.includes(normalezedFilter)
         return res
     })
     return filteredContacts

@@ -1,4 +1,3 @@
-// import { createStore } from 'redux'
 import { configureStore } from "@reduxjs/toolkit"
 import { persistStore, persistReducer, FLUSH,
     REHYDRATE,
@@ -9,7 +8,7 @@ import { persistStore, persistReducer, FLUSH,
 import storage from 'redux-persist/lib/storage'
 
 import { combineReducers } from "@reduxjs/toolkit"
-import contactReducer from './contacts/contacts-slice'
+import contactReducer from "./contacts/contacts-slice"
 import filterReducer from "./filter/filter-slice"
  
 const contactsPersistConfig = {
