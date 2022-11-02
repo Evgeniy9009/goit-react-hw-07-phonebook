@@ -26,6 +26,8 @@ export default function ContactForm() {
         }
         const action = addContact(contact)
         dispatch(action)
+        setName('')
+        setPhone('')
     }
     
 
@@ -51,8 +53,7 @@ export default function ContactForm() {
         const contact= {name, phone}
         onAddContact(contact)
         console.log(contact)
-        setName('')
-        setPhone('')
+        
 
     }
 
