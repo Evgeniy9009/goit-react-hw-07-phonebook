@@ -1,15 +1,13 @@
 import { useState } from 'react'
 import { nanoid } from 'nanoid'
 import css from 'components/ContactForm/ContactForm.module.css'
-// import { addContact } from '../../redux/contacts/contacts-slice'
 import { addContact } from 'redux/contacts/contacts-operation'
 import { useDispatch, useSelector } from 'react-redux'
 import { getFilterContacts } from 'redux/contacts/contacts-selector'
 
 export default function ContactForm() {
 
-    const items = useSelector(getFilterContacts)
-    console.log('items', items)
+    // const items = useSelector(getFilterContacts)
 
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')

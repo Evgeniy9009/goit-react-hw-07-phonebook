@@ -3,11 +3,13 @@ import css from 'components/ContactList/ContactList.module.css'
 import { useDispatch, useSelector } from "react-redux";
 // import { removeContact } from 'redux/contacts/contacts-slice';
 import { removeContact } from 'redux/contacts/contacts-operation';
-import { getFilterContacts } from '../../redux/contacts/contacts-selector'
+import { getFilterContacts, getNumberOfAllContacts } from '../../redux/contacts/contacts-selector'
 
 export default function ContactList() {
   const items = useSelector(getFilterContacts)
   const dispatch = useDispatch()
+
+  const contactsCount = useSelector(getNumberOfAllContacts)
 
   const onRemoveContact = (id) => {
     const action = removeContact(id)
@@ -22,7 +24,7 @@ export default function ContactList() {
   return (
     <div>
       <ul>{elements}</ul>
-      {items?.length===0 && <p>Ничего не найдено.</p> }
+      {items?.length > 0 ? <p>Всего контактов: {contactsCount}</p> : <p>Ничего не найдено.</p>}
     </div>
   )
 }
