@@ -24,7 +24,8 @@ export default function ContactList() {
   return (
     <div>
       <ul>{elements}</ul>
-      {items?.length > 0 ? <p>Всего контактов: {contactsCount}</p> : <p>Ничего не найдено.</p>}
+      {items.length === 0 && <p>Ничего не найдено.</p>}
+      <p>Всего контактов: {contactsCount}</p> 
     </div>
   )
 }
